@@ -37,11 +37,16 @@ int main()
 
     struct sigaction conf_sinal;
     init_sigaction(&conf_sinal);
-    conf_sinal.sa_handler = &sinal_chegou;
+    conf_sinal.sa_handler = &sinal_chegou; //acao customizada pelo processo
 
-    conf_sinal.sa_handler(78);
+    //conf_sinal.sa_handler = SIG_IGN; //ignora o sinal
+    //conf_sinal.sa_handler = SIG_DFL; //reset para configuracao padrao
 
-    sigaction(SIGINT, &conf_sinal, NULL);
+
+
+    if(sigaction(SIGINT, &conf_sinal, NULL)){
+        err_exit("erro ao instalar tratador do SIGINT.");
+    }
 
     while(1) {
         printf("%s\n", msg);
