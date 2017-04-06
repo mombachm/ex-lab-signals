@@ -5,8 +5,10 @@
 #include <string.h>
 
 #define _POSIX_SOURCE
+#define TEMPO_ALARME 5
 
 void sinal_chegou(int signum) {
+if (signum != SIGALRM) alarm(0); //desarma o alarme se foi acionado pelo Ctrl+C
     run_firefox("www.google.com");
 }
 
@@ -47,6 +49,14 @@ int main()
     if(sigaction(SIGINT, &conf_sinal, NULL)){
         err_exit("erro ao instalar tratador do SIGINT.");
     }
+
+
+    //conf_sinal.sa_handler = ;
+    if(sigaction(SIGALRM, &conf_sinal, NULL)){
+        err_exit("erro ao instalar tratador do SIGALARM.");
+    }
+
+    alarm(TEMPO_ALARME);
 
     while(1) {
         printf("%s\n", msg);
