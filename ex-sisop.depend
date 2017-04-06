@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1491513512 source:/home/mombachm/projects/ex-sisop/main.c
+	<stdio.h>
+	<stdlib.h>
+	<unistd.h>
+	<signal.h>
+	<string.h>
+
